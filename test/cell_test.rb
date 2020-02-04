@@ -47,7 +47,6 @@ end
 #Again, I think this is duplicative and the fired_upon? and fired.upon methods can both be tested with this single test. Copying below for now / to meet project requirements, but I think we can delete the second test.
 
   def test_if_cell_has_been_fired_upon?
-    skip
     cell = Cell.new("B4")
     assert_equal false, cell.fired_upon?
     cell.fire_upon
@@ -57,7 +56,6 @@ end
 #See note above, I think the below test can be deleted after our project check in.
 
 def test_if_cell_has_fire_upon
-  skip
   cell = Cell.new("B4")
   assert_equal false, cell.fired_upon?
   cell.fire_upon
