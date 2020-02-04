@@ -20,9 +20,6 @@ class TurnTest < Minitest::Test
     assert_equal 2, cruiser.health
     cruiser.hit
     assert_equal 1, cruiser.health
-  end    
+  end
 
-#Assigned Tests
-#Health --> Krista
-#Sunk --> Max
-#Hit --> Krista
+#Test Ship is Sunk --> Max
