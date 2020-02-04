@@ -1,17 +1,22 @@
 require 'minitest/autorun'
-require 'minitest/pride'
 require './lib/ship.rb
 
-class TurnTest < Minitest::Test
+class ShipTest < Minitest::Test
 
-#Test Ship Exists --> Max
+  def test_ship_exist
+    cruiser = Ship.new("Cruiser", 3)
+    assert_instance_of Ship, cruiser
+  end
 
   def test_ship_has_name
     cruiser = Ship.new("Cruiser", 3)
     assert_equal "Cruiser", ship.name
   end
 
-#Test Ship Has Length --> Max
+  def test_ship_has_length
+    cruiser = Ship.new("Cruiser", 3)
+    assert_equal 3, cruiser.length
+    end
 
   def test_ship_health
     cruiser = Ship.new("Cruiser", 3)
@@ -22,4 +27,20 @@ class TurnTest < Minitest::Test
     assert_equal 1, cruiser.health
   end
 
-#Test Ship is Sunk --> Max
+  def test_ship_has_been_sunk
+    cruiser = Ship.new("Cruiser", 3)
+    assert_equal false, cruiser.sunk?
+    cruiser.hit
+    cruiser.hit
+    assert_equal false, cruiser.sunk?
+    cruiser.hit
+    assert_equal true, cruiser.sunk?
+  end
+
+  def test_ship_has_been_hit
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+    assert_equal 2, cruiser.health
+  end
+
+end
