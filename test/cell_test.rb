@@ -29,6 +29,7 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_is_empty?
+    skip
     cell = Cell.new("B4")
     assert_equal true, cell.empty?
     cruiser = Ship.new("Cruiser", 3)
@@ -68,7 +69,7 @@ class CellTest < Minitest::Test
 
 #Render
   def test_if_cell_is_render
-    skip
+
     cell_1 = Cell.new("B4")
     assert_equal '.' , cell_1.render
 
