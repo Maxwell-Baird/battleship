@@ -1,6 +1,7 @@
 class Cell
 
   attr_reader :ship
+
   def initialize(placement_parameter)
     @coordinate = placement_parameter
     @ship = nil
@@ -14,8 +15,9 @@ class Cell
   def fired_upon?
     @fired_upon
   end
-  
+
   def fire_upon
     @fired_upon = true
   end
+  
 end
