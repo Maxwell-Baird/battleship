@@ -20,7 +20,7 @@ class CellTest < Minitest::Test
 
   def test_if_cell_holds_ship
     cell = Cell.new("B4")
-    assert_equal nil, cell.ship
+    assert_nil cell.ship
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
     assert_equal cruiser, cell.ship
@@ -38,7 +38,7 @@ class CellTest < Minitest::Test
 
 def test_if_cell_can_place_ship
   cell = Cell.new("B4")
-  assert_equal nil, cell.ship
+  assert_nil cell.ship
   cruiser = Ship.new("Cruiser", 3)
   cell.place_ship(cruiser)
   assert_equal cruiser, cell.ship
