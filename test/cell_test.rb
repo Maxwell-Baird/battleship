@@ -10,5 +10,11 @@ class CellTest < Minitest::Test
     assert_equal 'B4', cell.coordinate
   end
 
+  def test_if_cell_is_empty?
+    cell = Cell.new("B4")
+    assert_equal true, cell.empty?
+    cruiser = Ship.new("Cruiser", 3)
+    assert_equal false, cell.empty?
+  end
 
 end
