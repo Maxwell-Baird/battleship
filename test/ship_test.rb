@@ -1,5 +1,7 @@
 require 'minitest/autorun'
-require './lib/ship.rb
+require 'minitest/pride'
+require './lib/ship'
+
 
 class ShipTest < Minitest::Test
 
