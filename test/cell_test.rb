@@ -11,21 +11,23 @@ class CellTest < Minitest::Test
 #  end
 
   def test_if_cell_has_coordinate
+    skip
     cell = Cell.new("B4")
     assert_equal 'B4', cell.coordinate
   end
 
 #This test tests both cell.ship and cell.place_ship. Since the method cell.place_ship(cruiser) has no return value, you can't see that it's done what is' supposed to do until you call cell.ship again. I'll copy and paste this test in the cell.place_ship space, but I think we can confirm during our project check in and delete the duplicate.
 
-#  def test_if_cell_holds_ship
-#    cell = Cell.new("B4")
-#    assert_equal nil, cell.ship
-#    cruiser = Ship.new("Cruiser", 3)
-#    cell.place_ship(cruiser)
-#    assert_equal cruiser, cell.ship
-#  end
+  def test_if_cell_holds_ship
+    cell = Cell.new("B4")
+    assert_nil cell.ship
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    assert_equal cruiser, cell.ship
+  end
 
   def test_if_cell_is_empty?
+    skip
     cell = Cell.new("B4")
     assert_equal true, cell.empty?
     cruiser = Ship.new("Cruiser", 3)
@@ -34,13 +36,13 @@ class CellTest < Minitest::Test
 
 #See note above, I think the below test can be deleted after our project check in
 
-#def test_if_cell_can_place_ship
-#  cell = Cell.new("B4")
-#  assert_equal nil, cell.ship
-#  cruiser = Ship.new("Cruiser", 3)
-#  cell.place_ship(cruiser)
-#  assert_equal cruiser, cell.ship
-#end
+def test_if_cell_can_place_ship
+  cell = Cell.new("B4")
+  assert_nil cell.ship
+  cruiser = Ship.new("Cruiser", 3)
+  cell.place_ship(cruiser)
+  assert_equal cruiser, cell.ship
+end
 
 #Again, I think this is duplicative and the fired_upon? and fired.upon methods can both be tested with this single test. Copying below for now / to meet project requirements, but I think we can delete the second test.
 
@@ -62,6 +64,7 @@ class CellTest < Minitest::Test
 
 #Render
   def test_if_cell_is_render
+    skip
     cell_1 = Cell.new("B4")
     assert_equal '.' , cell_1.render
 
