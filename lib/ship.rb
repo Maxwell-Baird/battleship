@@ -1,7 +1,9 @@
 class Ship
+  attr_reader :length
 
-    def initialize(name_parameter, length_parameter)
-      @name = name_parameter
-      @length = length_parameter
-    end
+  def initialize(name_parameter, length_parameter)
+    @name = name_parameter
+    @length = length_parameter
+  end
+
 end

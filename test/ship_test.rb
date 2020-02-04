@@ -6,6 +6,7 @@ require './lib/ship'
 class ShipTest < Minitest::Test
 
   def test_ship_exist
+    skip
     cruiser = Ship.new("Cruiser", 3)
     assert_instance_of Ship, cruiser
   end
@@ -17,7 +18,6 @@ class ShipTest < Minitest::Test
 #  end
 
   def test_ship_has_length
-    skip
     cruiser = Ship.new("Cruiser", 3)
     assert_equal 3, cruiser.length
     end
