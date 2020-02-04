@@ -8,7 +8,7 @@ class Cell
     @fired_upon = false
   end
 
-  def place_ship (ship_parameter)
+  def place_ship(ship_parameter)
     @ship = ship_parameter
   end
 
@@ -19,5 +19,5 @@ class Cell
   def fire_upon
     @fired_upon = true
   end
-  
+
 end
