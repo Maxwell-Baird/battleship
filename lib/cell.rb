@@ -1,6 +1,6 @@
 class Cell
 
-  attr_reader :ship,
+  attr_reader :ship
   def initialize(placement_parameter)
     @coordinate = placement_parameter
     @ship = nil
