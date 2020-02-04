@@ -11,6 +11,7 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_has_coordinate
+    skip
     cell = Cell.new("B4")
     assert_equal 'B4', cell.coordinate
   end
@@ -19,13 +20,14 @@ class CellTest < Minitest::Test
 
   def test_if_cell_holds_ship
     cell = Cell.new("B4")
-    assert_equal nil, cell.ship
+    assert_nil cell.ship
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
     assert_equal cruiser, cell.ship
   end
 
   def test_if_cell_is_empty?
+    skip
     cell = Cell.new("B4")
     assert_equal true, cell.empty?
     cruiser = Ship.new("Cruiser", 3)
@@ -36,7 +38,7 @@ class CellTest < Minitest::Test
 
 def test_if_cell_can_place_ship
   cell = Cell.new("B4")
-  assert_equal nil, cell.ship
+  assert_nil cell.ship
   cruiser = Ship.new("Cruiser", 3)
   cell.place_ship(cruiser)
   assert_equal cruiser, cell.ship
@@ -62,6 +64,7 @@ end
 
 #Render
   def test_if_cell_is_render
+    skip
     cell_1 = Cell.new("B4")
     assert_equal '.' , cell_1.render
 
