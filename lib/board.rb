@@ -1,6 +1,5 @@
 require './lib/cell'
 require './lib/ship'
-require 'pry'
 
 class Board
 
@@ -60,8 +59,6 @@ class Board
         check = false
       end
     end
-
-
 
     check
   end
