@@ -2,17 +2,18 @@ require './lib/ship'
 
 class Cell
 
-  attr_reader :ship, :coordinate, :fired_upon
+  attr_reader :ship, :coordinate
 
   def initialize(placement_parameter)
     @coordinate = placement_parameter
     @ship = nil
     @fired_upon = false
+    @cell_empty = true
   end
 
   def place_ship(ship_parameter)
     @ship = ship_parameter
-    @cell_empty = true
+    @cell_empty = false
   end
 
   def fired_upon?
@@ -30,15 +31,16 @@ class Cell
   def render(cell_status = nil)
     if cell_status == true
       p "S"
-    elsif @fired_upon == false
+    elsif fired_upon? == false
       p "."
-    elsif ship.sunk? == true
-      p "X"
-    elsif @fired_upon == true && @cell_empty == true
-      ship.hit
+    elsif fired_upon? == true && @cell_empty == true
+      p 'M'
+    elsif (fired_upon? == true && @ship != nil && @cell_empty == false &&
+      @ship.sunk? == false)
+
       p "H"
-    elsif @fired_upon == true
-      p "M"
+    elsif @ship != nil && @ship.sunk? == true
+      p "X"
     end
   end
 
