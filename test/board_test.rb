@@ -7,7 +7,6 @@ require './lib/board'
 class BoardTest < Minitest::Test
 
   def test_board_has_valid_placement_length
-
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -16,7 +15,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_consecutive
-
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -27,7 +25,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_diagonal
-
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -36,7 +33,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_valid
-
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
