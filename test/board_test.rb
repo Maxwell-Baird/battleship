@@ -6,6 +6,22 @@ require './lib/board'
 
 class BoardTest < Minitest::Test
 
+
+  def test_new_board_exists
+    board = Board.new
+    assert_instance_of Board, board
+  end
+
+  def test_board_has_valid_coordinate
+    board = Board.new
+    assert_equal true, board.valid_coordinate?("A1")
+    assert_equal true, board.valid_coordinate?("D4")
+    assert_equal false, board.valid_coordinate?("A5")
+    assert_equal false, board.valid_coordinate?("E1")
+    assert_equal false, board.valid_coordinate?("A22")
+  end
+
+
   def test_board_has_valid_placement_length
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
