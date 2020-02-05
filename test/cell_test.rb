@@ -6,13 +6,11 @@ require './lib/cell'
 class CellTest < Minitest::Test
 
   def test_cell_exist
-    skip
     cell = Cell.new("B4")
     assert_instance_of Cell, cell
   end
 
   def test_if_cell_has_coordinate
-    skip
     cell = Cell.new("B4")
     assert_equal 'B4', cell.coordinate
   end
@@ -32,7 +30,7 @@ class CellTest < Minitest::Test
     assert_equal true, cell.empty?
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
-    assert_equal true, cell.empty?
+    assert_equal false, cell.empty?
   end
 
 #See note above, I think the below test can be deleted after our project check in
