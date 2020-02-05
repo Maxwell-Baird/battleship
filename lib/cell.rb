@@ -12,7 +12,7 @@ class Cell
 
   def place_ship(ship_parameter)
     @ship = ship_parameter
-    @cell_empty = true
+    @cell_empty = false
   end
 
   def fired_upon?
@@ -34,7 +34,7 @@ class Cell
       p "."
     elsif ship.sunk? == true
       p "X"
-    elsif @fired_upon == true && @cell_empty == true
+    elsif @fired_upon == true && @cell_empty == false
       ship.hit
       p "H"
     elsif @fired_upon == true
