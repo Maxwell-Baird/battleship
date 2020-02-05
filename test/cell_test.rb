@@ -82,8 +82,8 @@ class CellTest < Minitest::Test
     assert_equal '.', cell_2.render
     assert_equal 'S', cell_2.render(true)
 
-#    cell_2.fire_upon
-#    assert_equal 'H', cell_2.render
+    cell_2.fire_upon
+    assert_equal 'H', cell_2.render
 #    cruiser.hit
 #    cruiser.hit
 #    assert_equal 'X', cell_2.render
