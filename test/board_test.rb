@@ -52,7 +52,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     assert_equal 16, board.cells.length
     board.cells.each_key do |key|
-      assert_equal Cell, board.cells[key].class
+      assert_instance_of Cell, board.cells[key]
     end
   end
 
