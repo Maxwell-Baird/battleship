@@ -8,6 +8,7 @@ class Cell
     @coordinate = placement_parameter
     @ship = nil
     @fired_upon = false
+    @cell_empty = true
   end
 
   def place_ship(ship_parameter)
