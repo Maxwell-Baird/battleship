@@ -32,8 +32,8 @@ class Cell
       p "S"
     elsif @fired_upon == false
       p "."
-#    elsif ship.sunk? == true
-#      p "X"
+    elsif ship.sunk? == true
+      p "X"
     elsif @fired_upon == true && @cell_empty == true
       ship.hit
       p "H"
