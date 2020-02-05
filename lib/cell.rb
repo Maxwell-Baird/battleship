@@ -30,6 +30,8 @@ class Cell
       p "S"
     elsif @fired_upon == false
       p "."
+    elsif @fired_upon == true && @cell_empty == true
+      p "H"
     elsif @fired_upon == true
       p "M"
     end
