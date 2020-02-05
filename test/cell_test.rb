@@ -18,7 +18,6 @@ class CellTest < Minitest::Test
 #This test tests both cell.ship and cell.place_ship. Since the method cell.place_ship(cruiser) has no return value, you can't see that it's done what is' supposed to do until you call cell.ship again. I'll copy and paste this test in the cell.place_ship space, but I think we can confirm during our project check in and delete the duplicate.
 
   def test_if_cell_holds_ship
-
     cell = Cell.new("B4")
     assert_nil cell.ship
     cruiser = Ship.new("Cruiser", 3)
@@ -48,7 +47,6 @@ class CellTest < Minitest::Test
 #Again, I think this is duplicative and the fired_upon? and fired.upon methods can both be tested with this single test. Copying below for now / to meet project requirements, but I think we can delete the second test.
 
   def test_if_cell_has_been_fired_upon?
-  
     cell = Cell.new("B4")
     assert_equal false, cell.fired_upon?
     cell.fire_upon
@@ -78,7 +76,6 @@ class CellTest < Minitest::Test
     cell_2.place_ship(cruiser)
     assert_equal ".", cell_2.render
     assert_equal "S", cell_2.render(true)
-
     cell_2.fire_upon
     assert_equal "H", cell_2.render
     cruiser.hit
