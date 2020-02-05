@@ -71,7 +71,10 @@ class CellTest < Minitest::Test
   def test_if_cell_is_render
 
     cell_1 = Cell.new("B4")
-    assert_equal '.' , cell_1.render
+    assert_equal ".", cell_1.render
+
+    cell_1.fire_upon
+    assert_equal "M", cell_1.render
 
 #    cell_2 = Cell.new("C3")
 #    cruiser = Ship.new("Cruiser", 3)

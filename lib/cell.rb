@@ -27,7 +27,9 @@ class Cell
 
   def render()
     if @fired_upon == false
-      p '.'
+      p "."
+    elsif @fired_upon == true
+      p "M"
     end
   end
 
