@@ -76,9 +76,7 @@ class CellTest < Minitest::Test
     cell_2.place_ship(cruiser)
     assert_equal ".", cell_2.render
     assert_equal "S", cell_2.render(true)
-
     cell_2.fire_upon
-    cruiser.hit
     assert_equal "H", cell_2.render
     cruiser.hit
     cruiser.hit
