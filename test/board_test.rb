@@ -6,6 +6,7 @@ require './lib/board'
 
 class BoardTest < Minitest::Test
 
+
   def test_new_board_exists
     board = Board.new
     assert_instance_of Board, board
@@ -19,6 +20,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("E1")
     assert_equal false, board.valid_coordinate?("A22")
   end
+
 
   def test_board_has_valid_placement_length
     board = Board.new

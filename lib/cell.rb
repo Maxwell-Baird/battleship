@@ -21,6 +21,9 @@ class Cell
   end
 
   def fire_upon
+    if @ship != nil
+      @ship.hit
+    end
     @fired_upon = true
     if @ship != nil
       ship.hit
@@ -45,6 +48,5 @@ class Cell
       p "X"
     end
   end
-
 
 end

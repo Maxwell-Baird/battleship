@@ -39,7 +39,6 @@ class CellTest < Minitest::Test
   end
 
   def test_if_cell_is_render
-
     cell_1 = Cell.new("B4")
     assert_equal ".", cell_1.render
 
