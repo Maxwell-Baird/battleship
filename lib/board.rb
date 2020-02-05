@@ -64,9 +64,16 @@ class Board
   end
 
   def render
+  #  p  "  1 2 3 4 A"
+    i = 16
     cells.map do |cell_name, cell|
-      cell.render
+      i -= 1
+      if i % 4 == 0
+        p " \r\n"
+        cell.render
+      else
+        cell.render
+      end
     end
   end
-
 end
