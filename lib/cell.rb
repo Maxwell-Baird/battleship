@@ -25,12 +25,15 @@ class Cell
     @cell_empty
   end
 
-  def render()
-    if @fired_upon == false
+  def render(cell_status = nil)
+    if cell_status == true
+      p "S"
+    elsif @fired_upon == false
       p "."
     elsif @fired_upon == true
       p "M"
     end
   end
+
 
 end
