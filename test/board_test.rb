@@ -59,15 +59,14 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
-    board.valid_placement?(submarine, ["A1", "B1"])
+    assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
   end
 
   def test_board_has_cells
-    skip
     board = Board.new
     assert_equal 16, board.cells.length
     board.cells.each_key do |key|
-      assert_equal Cell, board.cells[key].class
+      assert_instance_of Cell, board.cells[key]
     end
   end
 
