@@ -37,7 +37,6 @@ class Cell
       p 'M'
     elsif (fired_upon? == true && @ship != nil && @cell_empty == false &&
       @ship.sunk? == false)
-
       p "H"
     elsif @ship != nil && @ship.sunk? == true
       p "X"
