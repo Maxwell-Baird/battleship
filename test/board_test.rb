@@ -7,11 +7,13 @@ require './lib/board'
 class BoardTest < Minitest::Test
 
   def test_new_board_exists
+    skip
     board = Board.new
     assert_instance_of Board, board
   end
 
   def test_board_has_valid_coordinate
+    skip
     board = Board.new
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
@@ -21,6 +23,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_length
+    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -29,6 +32,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_consecutive
+    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -39,6 +43,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_diagonal
+    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -47,6 +52,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_valid
+    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -55,6 +61,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_valid_placement_overlap
+    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
@@ -64,6 +71,7 @@ class BoardTest < Minitest::Test
 
   def test_board_has_cells
     skip
+    skip
     board = Board.new
     assert_equal 16, board.cells.length
     board.cells.each_key do |key|
@@ -72,7 +80,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_can_render
-    skip
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])

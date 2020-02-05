@@ -63,4 +63,13 @@ class Board
     check
   end
 
+def render
+  require "pry"; binding.pry
+  p " 1 2 3 4 \n" +
+  cells.each do |cell_name, cell|
+    cell.render
+  end
+
+end
+
 end
