@@ -3,6 +3,8 @@ require './lib/ship'
 
 class Board
 
+  attr_reader :cells
+
   def initialize
     @cells ={
       'A1' => Cell.new('A1'),
@@ -24,12 +26,12 @@ class Board
     }
   end
 
+
   def valid_coordinate?(cell_parameter)
     @cells.has_key?(cell_parameter)
   end
 
   def place(ship_parameter, ship_placement_array)
-
     ship_placement_array.each do |cell_name|
       @cells[cell_name].place_ship(ship_parameter)
     end
