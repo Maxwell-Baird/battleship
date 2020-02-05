@@ -53,7 +53,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_cells
-    skip
     board = Board.new
     assert_equal 16, board.cells.length
     board.cells.each_key do |key|
