@@ -21,6 +21,9 @@ class Cell
   end
 
   def fire_upon
+    if @ship != nil
+      @ship.hit
+    end
     @fired_upon = true
   end
 
@@ -37,12 +40,10 @@ class Cell
       p 'M'
     elsif (fired_upon? == true && @ship != nil && @cell_empty == false &&
       @ship.sunk? == false)
-      ship.hit
       p "H"
     elsif @ship != nil && @ship.sunk? == true
       p "X"
     end
   end
-
 
 end
