@@ -1,3 +1,5 @@
+require './lib/ship'
+
 class Cell
 
   attr_reader :ship, :coordinate, :fired_upon
@@ -30,7 +32,10 @@ class Cell
       p "S"
     elsif @fired_upon == false
       p "."
+#    elsif ship.sunk? == true
+#      p "X"
     elsif @fired_upon == true && @cell_empty == true
+      ship.hit
       p "H"
     elsif @fired_upon == true
       p "M"

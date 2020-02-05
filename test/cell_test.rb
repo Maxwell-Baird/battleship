@@ -84,8 +84,9 @@ class CellTest < Minitest::Test
 
     cell_2.fire_upon
     assert_equal "H", cell_2.render
-#    cruiser.hit
-#    cruiser.hit
-#    assert_equal 'X', cell_2.render
+    cruiser.hit
+    cruiser.hit
+    require "pry"; binding.pry
+#    assert_equal "X", cell_2.render
   end
 end
