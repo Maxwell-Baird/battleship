@@ -1,6 +1,6 @@
 class Cell
 
-  attr_reader :ship, :coordinate
+  attr_reader :ship, :coordinate, :fired_upon
 
   def initialize(placement_parameter)
     @coordinate = placement_parameter
@@ -25,11 +25,9 @@ class Cell
     @cell_empty
   end
 
-  def render
-    if cell.fired_up? = false
-      '.'
-    end
-
+  def render()
+    if @fired_upon == false
+      p '.'
     end
   end
 
