@@ -63,6 +63,7 @@ class Board
     check
   end
 
+
   def render(view = false)
     @board_render = []
     i = 16
@@ -84,9 +85,7 @@ class Board
         @board_render << "\n"
       else
         @board_render << cell.render(view)
-      end
-    end
-    p @board_render.join(' ')
-  end
+
+
 
 end
