@@ -35,7 +35,7 @@ class Cell
   end
 
   def render(cell_status = nil)
-    if cell_status == true
+    if cell_status == true && @ship != nil
       p "S"
     elsif fired_upon? == false
       p "."

@@ -63,4 +63,30 @@ class Board
     check
   end
 
+  def render(view = false)
+    @board_render = []
+    i = 16
+    @board_render << " 1 2 3 4"
+    @board_render << "\nA"
+    cells.each do |cell_name, cell|
+      i -= 1
+      if i == 12
+        @board_render << cell.render(view)
+        @board_render << "\nB"
+      elsif i == 8
+        @board_render << cell.render(view)
+        @board_render << "\nC"
+      elsif i == 4
+        @board_render << cell.render(view)
+        @board_render << "\nD"
+      elsif i == 0
+        @board_render << cell.render(view)
+        @board_render << "\n"
+      else
+        @board_render << cell.render(view)
+      end
+    end
+    p @board_render.join(' ')
+  end
+
 end
