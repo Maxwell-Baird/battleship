@@ -20,4 +20,14 @@ class ComputerTest < Minitest::Test
     assert_equal 3, computer.choose_location(cruiser).length
     assert_equal 2, computer.choose_location(submarine).length
   end
+
+  def test_computer_shot
+    computer = Computer.new
+    computer.shot_at
+    assert_equal 15, computer.unfired.length
+    computer.shot_at
+    assert_equal 14, computer.unfired.length
+    computer.shot_at
+    assert_equal 13, computer.unfired.length
+  end
 end

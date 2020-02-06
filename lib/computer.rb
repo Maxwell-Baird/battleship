@@ -5,9 +5,10 @@ require 'pry'
 
 class Computer
 
+  attr_reader :unfired
 
   def initialize
-
+    @unfired = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4','D1','D2','D3','D4']
   end
 
   def choose_location(ship_parameter)
@@ -15,8 +16,6 @@ class Computer
     vert_or_horz = vert_or_horz_choice.sample
     location = ''
     cells_location = []
-    numbers_holder = ['1'..'4']
-    letter_holder = ['A'..'D']
 
     if vert_or_horz == 'h' && ship_parameter.length == 3
       possible_locations_h_3 = ['A1','A2','B1','B2','C1','C2','D1','D2']
@@ -66,6 +65,12 @@ class Computer
     end
 
     cells_location
+  end
+
+  def shot_at
+    shot = @unfired.sample
+    @unfired.delete(shot)
+    shot
   end
 
 
