@@ -85,7 +85,8 @@ class Board
         @board_render << "\n"
       else
         @board_render << cell.render(view)
-
-
-
+      end
+    end
+    p @board_render.join(' ')
+  end
 end
