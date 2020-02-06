@@ -63,17 +63,20 @@ class Board
     check
   end
 
+
   def render
-  #  p  "  1 2 3 4 A"
+    @board_render = []
     i = 16
-    cells.map do |cell_name, cell|
+    cells.each do |cell_name, cell|
       i -= 1
       if i % 4 == 0
-        p " \r\n"
-        cell.render
+      @board_render << cell.render
+      @board_render << " \n"
       else
-        cell.render
+      @board_render << cell.render
       end
     end
+    p @board_render
   end
-end
+
+  end
