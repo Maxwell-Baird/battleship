@@ -64,26 +64,28 @@ class Board
   end
 
 
-  def render
+  def render(cell_status = nil)
     @board_render = []
     i = 16
-    @board_render << "  1 2 3 4 \n A"
+    @board_render << "  "
+    @board_render << "1 2 3 4"
+    @board_render << "\n A"
     cells.each do |cell_name, cell|
       i -= 1
       if i == 12
-      @board_render << cell.render
+      @board_render << cell.render(cell_status = nil)
       @board_render << " \n B"
     elsif i == 8
-      @board_render << cell.render
+      @board_render << cell.render(cell_status = nil)
       @board_render << " \n C"
     elsif i == 4
-      @board_render << cell.render
+      @board_render << cell.render(cell_status = nil)
       @board_render << " \n D"
       else
-      @board_render << cell.render
+      @board_render << cell.render(cell_status = nil)
       end
     end
-    p @board_render
+    p @board_render.join(' ')
   end
 
   end
