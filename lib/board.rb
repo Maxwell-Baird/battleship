@@ -42,7 +42,6 @@ class Board
     check = false
     placement_array = ['A1B1C1D1','A2B2C2D2','A3B3C3D3',
     'A4B4C4D4','A1A2A3A4','B1B2B3B4','C1C2C3C4','D1D2D3D4']
-
     ship_string = ship_placement_array.join
     placement_array.each do |row|
       if row.include?(ship_string)
