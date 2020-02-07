@@ -1,4 +1,6 @@
 require './lib/board'
+require './lib/computer'
+require './lib/ship'
 
 class Game
 
@@ -26,12 +28,21 @@ class Game
       end
   end
 
+  def create_board
+    computer = Computer.new
+    board = Board.new
+    computer_cruiser = Ship.new('Computer Cruiser', 3)
+    computer_submarine = Ship.new('Computer Submarine', 2)
+    computer.choose_location(computer_cruiser).length
+    computer.choose_location(computer_submarine).length
+  end
+
   def prompt_player_initial_placement
     print "I have laid out my ships on the grid. \nYou now need to lay out your two ships. \nThe Cruiser is three units long and the Submarine is two units long. \n  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \nEnter the first square for the Cruiser (This should be 1 space and correspond to the grid -- for example, A3):
 > "
   end
 
-  
+
 
 
 end
