@@ -9,7 +9,7 @@ print game.start_message
 game.new_game_prompt
 
 if game.start_another_game == true
-  game.create_board
-  game.prompt_player_initial_placement
+  game.board_setup
+  
 
 end

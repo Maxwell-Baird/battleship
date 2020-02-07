@@ -4,7 +4,12 @@ require './lib/ship'
 
 class Game
 
-  attr_reader :start_message, :start_another_game, :computer_cruiser, :computer_submarine
+  attr_reader :start_message,
+              :start_another_game,
+              :computer_cruiser,
+              :computer_submarine,
+              :computer_cruiser_location,
+              :computer_submarine_location
   attr_accessor :player_cruiser_coordinates
 
   def initialize
@@ -28,6 +33,10 @@ class Game
       end
     end
 
+  def board_setup
+    create_computer_ships
+  end
+
   def create_computer_ships
     computer = Computer.new
     board = Board.new
@@ -36,10 +45,10 @@ class Game
   end
 
   def place_computer_ships
-    computer_cruiser_location = []
-    computer_cruiser_location << computer.choose_location(computer_cruiser)
-    computer_submarine_location = []
-    computer_submarine_location << computer.choose_location(computer_submarine)
+    @computer_cruiser_location = []
+    @computer_cruiser_location << computer.choose_location(@computer_cruiser)
+    @computer_submarine_location = []
+    @computer_submarine_location << computer.choose_location(computer_submarine)
   end
 
   def prompt_player_initial_placement
