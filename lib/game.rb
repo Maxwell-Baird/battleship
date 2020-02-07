@@ -12,8 +12,8 @@ class Game
               :computer_submarine_location,
               :computer,
               :board,
-              :cruiser_string
-  attr_accessor :player_cruiser_coordinates
+              :player_cruiser
+  attr_accessor :player_cruiser_coordinates,   :cruiser_coordinate_response
 
   def initialize
     @start_message = "Welcome to BATTLESHIP \n Enter p to play. \n Enter q to quit. \n"
@@ -42,13 +42,17 @@ class Game
 
     print "I have laid out my ships on the grid. \nYou now need to lay out your two ships. \nThe Cruiser is three units long and the Submarine is two units long. \n  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \nEnter three squares for the Cruiser (These should be in an horizontal or vertical line and correspond to the grid -- for example, A1, A2, A3):
 > "
-    cruiser_coordinate_response = []
-    cruiser_coordinate_response << gets.chomp
+    @cruiser_coordinate_response = []
+    @cruiser_coordinate_response << gets.chomp
+    @player_cruiser = Ship.new("Player_Cruiser", 3)
 
-    initial_cruiser_string = cruiser_coordinate_response.join()
-    remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
-    @cruiser_string = remove_spaces.gsub(/[[:punct:]]/, '')
+#    initial_cruiser_string = cruiser_coordinate_response.join()
+#    remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
+#    @cruiser_string = remove_spaces.gsub(/[[:punct:]]/, '')
+  end
 
+  def validate_cruiser_placement(ship_parameter, ship_placement_array)
+    board.valid_placement?(ship_parameter, ship_placement_array)
   end
 
   def create_computer_ships
@@ -62,5 +66,6 @@ class Game
     computer.choose_location(@computer_cruiser)
     computer.choose_location(@computer_submarine)
   end
+
 
 end

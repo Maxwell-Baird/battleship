@@ -29,10 +29,15 @@ class GameTest < Minitest::Test
     assert_equal 2, game.computer.choose_location(game.computer_submarine).count
   end
 
-  def test_player_coordinates_received
-    game = Game.new
-    game.board_setup
-    assert_equal 6, game.cruiser_string.length
+  def test_validate_cruiser_placement
+    game1 = Game.new
+    game1.board_setup
+
+    game2 = Game.new
+    game2.board_setup
+
+    assert_equal true, game1.validate_cruiser_placement(game1.player_cruiser, game1.cruiser_coordinate_response)
+    assert_equal false, game2.validate_cruiser_placement(game2.player_cruiser, game2.cruiser_coordinate_response)
   end
 
   def test_prompt_player_initial_placement
