@@ -22,13 +22,22 @@ class Game
       end
   end
 
-  def prompt_player_ship_placement
-    print "I have laid out my ships on the grid. \nYou now need to lay out your two ships. \nThe Cruiser is three units long and the Submarine is two units long. \n  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \nEnter the squares for the Cruiser (3 spaces):
+  def prompt_player_initial_cruiser_placement
+    print "I have laid out my ships on the grid. \nYou now need to lay out your two ships. \nThe Cruiser is three units long and the Submarine is two units long. \n  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \nEnter the first square for the Cruiser (This should be 1 space and correspond to the grid -- for example, A3):
 > "
-    gets.chomp
+    @player_cruiser_coordinates = []
+
+    @player_cruiser_coordinates << gets.chomp
+
+    print "Great! Now enter the next coordinate. > "
+
+    @player_cruiser_coordinates << gets.chomp
+
+    print "Great! Now enter the last coordinate. > "
+
+    @player_cruiser_coordinates << gets.chomp
+
   end
 
-  def standardize_coordinates
-    require "pry"; binding.pry
-  end
+
 end
