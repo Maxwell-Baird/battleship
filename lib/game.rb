@@ -1,6 +1,7 @@
 require './lib/board'
 require './lib/computer'
 require './lib/ship'
+require './lib/cell'
 
 class Game
 
@@ -51,8 +52,12 @@ class Game
 #    @cruiser_string = remove_spaces.gsub(/[[:punct:]]/, '')
   end
 
-  def validate_cruiser_placement(ship_parameter, ship_placement_array)
-    board.valid_placement?(ship_parameter, ship_placement_array)
+  def place_player_cruiser(ship_parameter, ship_placement_array)
+    board.place(@player_cruiser, @cruiser_coordinate_response)
+  end
+
+  def validate_cruiser_coordinates(ship_parameter, ship_placement_array)
+    board.valid_placement?(@player_cruiser, @cruiser_coordinate_response)
   end
 
   def create_computer_ships

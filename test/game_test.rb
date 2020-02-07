@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/game'
 require './lib/ship'
 require './lib/computer'
+require './lib/cell'
 
 class GameTest < Minitest::Test
 
@@ -32,9 +33,12 @@ class GameTest < Minitest::Test
   def test_validate_cruiser_placement
     game1 = Game.new
     game1.board_setup
+    require "pry"; binding.pry
+    game1.place_player_cruiser(game1.player_cruiser, game1.cruiser_coordinate_response)
 
     game2 = Game.new
     game2.board_setup
+    game2.place_player_cruiser(game2.player_cruiser, game2.cruiser_coordinate_response)
 
     assert_equal true, game1.validate_cruiser_placement(game1.player_cruiser, game1.cruiser_coordinate_response)
     assert_equal false, game2.validate_cruiser_placement(game2.player_cruiser, game2.cruiser_coordinate_response)
