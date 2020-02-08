@@ -30,24 +30,13 @@ class GameTest < Minitest::Test
     assert_equal 2, game.computer.choose_location(game.computer_submarine).count
   end
 
-  def test_validate_cruiser_placement
-    game1 = Game.new
-    game1.board_setup
-    require "pry"; binding.pry
-    game1.place_player_cruiser(game1.player_cruiser, game1.cruiser_coordinate_response)
-
-    game2 = Game.new
-    game2.board_setup
-    game2.place_player_cruiser(game2.player_cruiser, game2.cruiser_coordinate_response)
-
-    assert_equal true, game1.validate_cruiser_placement(game1.player_cruiser, game1.cruiser_coordinate_response)
-    assert_equal false, game2.validate_cruiser_placement(game2.player_cruiser, game2.cruiser_coordinate_response)
-  end
-
-  def test_prompt_player_initial_placement
-    skip
+  def test_cruiser_conversion
     game = Game.new
-    assert_equal player_cruiser_coordinates != [], player_cruiser_coordinates
+    game.board_setup
+    game.cruiser_conversion
+    assert_equal 6, game.cruiser_string.length
   end
+
+
 
 end
