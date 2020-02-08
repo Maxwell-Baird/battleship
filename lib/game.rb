@@ -16,7 +16,8 @@ class Game
               :player_cruiser
   attr_accessor :player_cruiser_coordinates,
                 :cruiser_response,
-                :cruiser_string
+                :cruiser_string,
+                :cruiser_array
 
   def initialize
     @start_message = "Welcome to BATTLESHIP \n Enter p to play. \n Enter q to quit. \n"
@@ -55,6 +56,14 @@ class Game
     remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
     @cruiser_string = remove_spaces.gsub!(/[[:punct:]]/, '')
   end
+
+  def create_cruiser_coordinates
+    @cruiser_array = []
+    @cruiser_array << @cruiser_string[0] + @cruiser_string[1]
+    @cruiser_array << @cruiser_string[2] + @cruiser_string[3]
+    @cruiser_array << @cruiser_string[4] + @cruiser_string [5]
+  end
+
 
 
   def place_player_cruiser(ship_parameter, ship_placement_array)

@@ -31,12 +31,19 @@ class GameTest < Minitest::Test
   end
 
   def test_cruiser_conversion
+    skip
     game = Game.new
     game.board_setup
     game.cruiser_conversion
     assert_equal 6, game.cruiser_string.length
   end
 
-
+  def test_create_cruiser_coordinates
+    game = Game.new
+    game.board_setup
+    game.cruiser_conversion
+    game.create_cruiser_coordinates
+    assert_equal 3, game.cruiser_array.length
+  end
 
 end
