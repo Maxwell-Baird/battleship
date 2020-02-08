@@ -14,8 +14,9 @@ class Game
               :computer,
               :board,
               :player_cruiser
-              :cruiser_string 
-  attr_accessor :player_cruiser_coordinates, :cruiser_response
+  attr_accessor :player_cruiser_coordinates,
+                :cruiser_response,
+                :cruiser_string
 
   def initialize
     @start_message = "Welcome to BATTLESHIP \n Enter p to play. \n Enter q to quit. \n"
@@ -52,7 +53,7 @@ class Game
   def cruiser_conversion
     initial_cruiser_string = @cruiser_response.join()
     remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
-    @cruiser_string = remove_spaces.gsub(/[[:punct:]]/, '')
+    @cruiser_string = remove_spaces.gsub!(/[[:punct:]]/, '')
   end
 
 
