@@ -51,28 +51,40 @@ class Game
     @player_cruiser = Ship.new("Player_Cruiser", 3)
   end
 
+  def player_cruiser_setup
+    cruiser_conversion
+    create_cruiser_coordinate_array
+    place_player_ship(@player_cruiser, @cruiser_array)
+  end
+
   def cruiser_conversion
     initial_cruiser_string = @cruiser_response.join()
     remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
     @cruiser_string = remove_spaces.gsub!(/[[:punct:]]/, '')
   end
 
-  def create_cruiser_coordinates
+  def create_cruiser_coordinate_array
     @cruiser_array = []
     @cruiser_array << @cruiser_string[0] + @cruiser_string[1]
     @cruiser_array << @cruiser_string[2] + @cruiser_string[3]
     @cruiser_array << @cruiser_string[4] + @cruiser_string [5]
   end
 
+  def place_player_ship(ship_parameter, ship_placement_array)
+    board.valid_placement?(ship_parameter, ship_placement_array)
+      if true
+        board.place(ship_parameter, ship_placement_array)
+        print "Great, now let's place your submarine.\n Enter two squares for the Submarine (These should be in an horizontal or vertical line and correspond to the grid -- for example, C2 and D2): > "
 
-
-  def place_player_cruiser(ship_parameter, ship_placement_array)
-    board.place(@player_cruiser, @cruiser_coordinate_response)
+        @submarine_response = []
+        @submarine_response << gets.chomp
+        @player_submarine = Ship.new("Player_Submarine", 2)
+      else
+        print "Sorry, that doesn't look like a valid placement. Let's start again."
+      end
   end
 
-  def validate_cruiser_coordinates(ship_parameter, ship_placement_array)
-    board.valid_placement?(@player_cruiser, @cruiser_coordinate_response)
-  end
+
 
   def create_computer_ships
     @board = Board.new

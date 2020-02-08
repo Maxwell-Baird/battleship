@@ -38,12 +38,25 @@ class GameTest < Minitest::Test
     assert_equal 6, game.cruiser_string.length
   end
 
-  def test_create_cruiser_coordinates
+  def test_create_cruiser_coordinate_array
+    skip
     game = Game.new
     game.board_setup
     game.cruiser_conversion
-    game.create_cruiser_coordinates
+    game.create_cruiser_coordinate_array
     assert_equal 3, game.cruiser_array.length
   end
 
+  def test_validate_cruiser_coordinates
+    game = Game.new
+    game.board_setup
+    game.cruiser_conversion
+    game.create_cruiser_coordinate_array
+
+    assert_equal true, game.board.valid_coordinate?(game.cruiser_array[0])
+    assert_equal true, game.board.valid_coordinate?(game.cruiser_array[1])
+    assert_equal true, game.board.valid_coordinate?(game.cruiser_array[2])
+    assert_equal false, game.board.valid_coordinate?("G5")
+
+  end
 end
