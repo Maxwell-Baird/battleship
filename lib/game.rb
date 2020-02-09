@@ -12,7 +12,8 @@ class Game
               :computer_cruiser_location,
               :computer_submarine_location,
               :computer,
-              :board,
+              :computer_board,
+              :player_board,
               :player_cruiser,
               :cruiser_validation_array,
               :cruiser_validation_value,
@@ -49,7 +50,7 @@ class Game
       end
   end
 
-  def board_setup
+  def computer_board_setup
     create_computer_ships
     place_computer_ships
 
@@ -59,7 +60,7 @@ class Game
     @player_cruiser = Ship.new("Player_Cruiser", 3)
   end
 
-  def player_cruiser_setup
+  def player_board_setup
     cruiser_conversion
     create_cruiser_coordinate_array
     validate_cruiser_coordinates(@cruiser_array)
@@ -70,7 +71,8 @@ class Game
           if @cruiser_validation_value.include?(false)
             print "Hmmm...that isn't a valid placement. Let's start again."
           elsif @cruiser_validation_value.include?(true)
-            board.place(@player_cruiser, @cruiser_array)
+            player_board.place(@player_cruiser, @cruiser_array)
+            player_board.render(true)
             print "Great, let's place your submarine!
             \nEnter two squares for the Submarine (These should be in an horizontal or vertical line and correspond to the grid -- for example, C2 and D2): > "
 
@@ -82,24 +84,33 @@ class Game
       end
     end
 
-    def player_submarine_setup
-      submarine_conversion
-      create_submarine_coordinate_array
-      validate_submarine_coordinates(@submarine_array)
-        if @submarine_validation_array.include?(false)
-          print "Hmmm...those aren't valid coordinates. Let's start again. \n"
-        else
-          validate_submarine_placement(@player_submarine, @submarine_array)
-            if @submarine_validation_value.include?(false)
-              print "Hmmm...that isn't a valid placement. Let's start again."
-            elsif @submarine_validation_value.include?(true)
-              board.place(@player_submarine, @submarine_array)
-              print "Great, let's play! \n"
-            end
-        end
-      end
+  def player_submarine_setup
+    submarine_conversion
+    create_submarine_coordinate_array
+    validate_submarine_coordinates(@submarine_array)
+      if @submarine_validation_array.include?(false)
+        print "Hmmm...those aren't valid coordinates. Let's start again. \n"
+      else
+        validate_submarine_placement(@player_submarine, @submarine_array)
+          if @submarine_validation_value.include?(false)
+            print "Hmmm...that isn't a valid placement. Let's start again."
+          elsif @submarine_validation_value.include?(true)
+            @player_board.place(@player_submarine, @submarine_array)
+            @player_board.render(true)
+            print "Great, let's play! \n"
+          end
+    end
+  end
+
+  def take_turn
+  end
 
 #Helper Methods to Set Up Player Cruiser
+
+  def create_player_board
+    player_board = Board.new
+  end
+
   def cruiser_conversion
     initial_cruiser_string = @cruiser_response.join()
     remove_spaces = initial_cruiser_string.gsub!(/\s+/, '')
@@ -116,48 +127,48 @@ class Game
   def validate_cruiser_coordinates(cells)
     @cruiser_validation_array = []
      cells.each do |cell|
-       @cruiser_validation_array << board.cells.has_key?(cell)
+       @cruiser_validation_array << player_board.cells.has_key?(cell)
      end
   end
 
+
   def validate_cruiser_placement(ship_parameter, ship_placement_array)
     @cruiser_validation_value = []
-    @cruiser_validation_value << board.valid_placement?(ship_parameter, ship_placement_array)
+    @cruiser_validation_value << player_board.valid_placement?(ship_parameter, ship_placement_array)
 
   end
 
 #Helper Methods to Set Up Player Submarine
 
-def submarine_conversion
-  initial_submarine_string = @submarine_response.join()
-  remove_spaces = initial_submarine_string.gsub!(/\s+/, '')
-  @submarine_string = remove_spaces.gsub!(/[[:punct:]]/, '')
-end
+  def submarine_conversion
+    initial_submarine_string = @submarine_response.join()
+    remove_spaces = initial_submarine_string.gsub!(/\s+/, '')
+    @submarine_string = remove_spaces.gsub!(/[[:punct:]]/, '')
+  end
 
-def create_submarine_coordinate_array
-  @submarine_array = []
-  @submarine_array << @submarine_string[0] + @submarine_string[1]
-  @submarine_array << @submarine_string[2] + @submarine_string[3]
-end
+  def create_submarine_coordinate_array
+    @submarine_array = []
+    @submarine_array << @submarine_string[0] + @submarine_string[1]
+    @submarine_array << @submarine_string[2] + @submarine_string[3]
+  end
 
-def validate_submarine_coordinates(cells)
-  @submarine_validation_array = []
-   cells.each do |cell|
-     @submarine_validation_array << board.cells.has_key?(cell)
-   end
-end
+  def validate_submarine_coordinates(cells)
+    @submarine_validation_array = []
+    cells.each do |cell|
+      @submarine_validation_array << player_board.cells.has_key?(cell)
+    end
+  end
 
-def validate_submarine_placement(ship_parameter, ship_placement_array)
-  @submarine_validation_value = []
-  @submarine_validation_value << board.valid_placement?(ship_parameter, ship_placement_array)
-
-end
+  def validate_submarine_placement(ship_parameter,  ship_placement_array)
+    @submarine_validation_value = []
+    @submarine_validation_value << player_board.valid_placement?(ship_parameter, ship_placement_array)
+  end
 
 
 #Helper Methods to Set Up Computer Ships
 
   def create_computer_ships
-    @board = Board.new
+    @computer_board = Board.new
     @computer = Computer.new
     @computer_cruiser = Ship.new('Computer Cruiser', 3)
     @computer_submarine = Ship.new('Computer Submarine', 2)
@@ -167,6 +178,5 @@ end
     computer.choose_location(@computer_cruiser)
     computer.choose_location(@computer_submarine)
   end
-
 
 end
