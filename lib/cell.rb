@@ -36,16 +36,16 @@ class Cell
 
   def render(cell_status = nil)
     if cell_status == true && @ship != nil
-      p "S"
+       "S"
     elsif fired_upon? == false
-      p "."
+       "."
     elsif fired_upon? == true && @cell_empty == true
-      p 'M'
+       'M'
     elsif (fired_upon? == true && @ship != nil && @cell_empty == false &&
       @ship.sunk? == false)
-      p "H"
+       "H"
     elsif @ship != nil && @ship.sunk? == true
-      p "X"
+       "X"
     end
   end
 

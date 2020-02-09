@@ -60,7 +60,7 @@ class Game
     @player_cruiser = Ship.new("Player_Cruiser", 3)
   end
 
-  def player_board_setup
+  def player_board_setup_and_gameplay
     cruiser_conversion
     create_cruiser_coordinate_array
     validate_cruiser_coordinates(@cruiser_array)
@@ -80,6 +80,7 @@ class Game
             @submarine_response << gets.chomp
             @player_submarine = Ship.new("Player_Submarine", 2)
             player_submarine_setup
+            take_turn
           end
       end
     end
@@ -96,15 +97,47 @@ class Game
             print "Hmmm...that isn't a valid placement. Let's start again."
           elsif @submarine_validation_value.include?(true)
             @player_board.place(@player_submarine, @submarine_array)
-            @player_board.render(true)
             print "Great, let's play! \n"
           end
     end
   end
 
   def take_turn
+    display_boards
+    turn
   end
 
+  def display_boards
+    print "=============COMPUTER BOARD============="
+    computer_board.render(false)
+    print "==============PLAYER BOARD=============="
+    player_board.render(true)
+  end
+
+  def turn
+    print "Choose a coordinate to fire on: > "
+    player_coordinate_choice = gets.chomp
+    cell1 = Cell.new(player_coordinate_choice)
+    cell2 = Cell.new(computer.shot_at)
+    cell1.fire_upon
+      print "Your shot was a: "
+      if cell1.render == 'M'
+        print "MISS \n"
+      elsif cell1.render == 'H'
+        print "HIT \n"
+      elsif cell1.render == 'X'
+        print "HIT AND SINK!!! \n"
+      end
+    cell2.fire_upon
+    print "The computer's shot was a: "
+    if cell2.render == 'M'
+      print "MISS \n"
+    elsif cell2.render == 'H'
+      print "HIT \n"
+    elsif cell2.render == 'X'
+      print "HIT AND SINK!!! \n"
+    end
+  end
 #Helper Methods to Set Up Player Cruiser
 
   def cruiser_conversion
