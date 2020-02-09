@@ -57,6 +57,6 @@ class GameTest < Minitest::Test
     assert_equal true, game.board.valid_coordinate?(game.cruiser_array[1])
     assert_equal true, game.board.valid_coordinate?(game.cruiser_array[2])
     assert_equal false, game.board.valid_coordinate?("G5")
-
   end
+
 end

@@ -13,7 +13,9 @@ class Game
               :computer_submarine_location,
               :computer,
               :board,
-              :player_cruiser
+              :player_cruiser,
+              :validation_array
+              :validation_value
   attr_accessor :player_cruiser_coordinates,
                 :cruiser_response,
                 :cruiser_string,
@@ -54,8 +56,25 @@ class Game
   def player_cruiser_setup
     cruiser_conversion
     create_cruiser_coordinate_array
-    place_player_ship(@player_cruiser, @cruiser_array)
-  end
+    validate_cruiser_coordinates(@cruiser_array)
+      if @validation_array.include?(false)
+        print "Hmmm...those aren't valid coordinates. Let's start again."
+      else
+        board.place(@player_cruiser, @cruiser_array)
+        require "pry"; binding.pry
+        validate_cruiser_placement(@player_cruiser, @cruiser_array)
+          if @validation_value.include?(false)
+            print "Hmmm...that isn't a valid placement. Let's start again."
+          elsif @validation_value.include?(true)
+            print "Great, let's place your submarine!
+            \nEnter two squares for the Submarine (These should be in an horizontal or vertical line and correspond to the grid -- for example, C2 and D2):
+        > "
+            @submarine_response = []
+            @submarine_response << gets.chomp
+            @player_submarine = Ship.new("Player_Submarine", 2)
+          end
+      end
+    end
 
   def cruiser_conversion
     initial_cruiser_string = @cruiser_response.join()
@@ -70,21 +89,18 @@ class Game
     @cruiser_array << @cruiser_string[4] + @cruiser_string [5]
   end
 
-  def place_player_ship(ship_parameter, ship_placement_array)
-    board.valid_placement?(ship_parameter, ship_placement_array)
-      if true
-        board.place(ship_parameter, ship_placement_array)
-        print "Great, now let's place your submarine.\n Enter two squares for the Submarine (These should be in an horizontal or vertical line and correspond to the grid -- for example, C2 and D2): > "
-
-        @submarine_response = []
-        @submarine_response << gets.chomp
-        @player_submarine = Ship.new("Player_Submarine", 2)
-      else
-        print "Sorry, that doesn't look like a valid placement. Let's start again."
-      end
+  def validate_cruiser_coordinates(cells)
+    @validation_array = []
+     cells.each do |cell|
+       @validation_array << board.cells.has_key?(cell)
+     end
   end
 
+  def validate_cruiser_placement(ship_parameter, ship_placement_array)
+    @validation_value = []
+    @validation_value << board.valid_placement?(ship_parameter, ship_placement_array)
 
+  end
 
   def create_computer_ships
     @board = Board.new
