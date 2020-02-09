@@ -60,15 +60,15 @@ class Game
       if @validation_array.include?(false)
         print "Hmmm...those aren't valid coordinates. Let's start again."
       else
-        board.place(@player_cruiser, @cruiser_array)
-        require "pry"; binding.pry
         validate_cruiser_placement(@player_cruiser, @cruiser_array)
           if @validation_value.include?(false)
             print "Hmmm...that isn't a valid placement. Let's start again."
           elsif @validation_value.include?(true)
+            board.place(@player_cruiser, @cruiser_array)
             print "Great, let's place your submarine!
             \nEnter two squares for the Submarine (These should be in an horizontal or vertical line and correspond to the grid -- for example, C2 and D2):
         > "
+        require "pry"; binding.pry
             @submarine_response = []
             @submarine_response << gets.chomp
             @player_submarine = Ship.new("Player_Submarine", 2)
