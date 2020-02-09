@@ -12,7 +12,7 @@ class Computer
   end
 
   def choose_location(ship_parameter)
-    vert_or_horz_choice = ['v']
+    vert_or_horz_choice = ['v','h']
     vert_or_horz = vert_or_horz_choice.sample
     location = ''
     cells_location = []

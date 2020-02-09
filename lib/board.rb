@@ -54,11 +54,14 @@ class Board
       check = false
     end
 
-    ship_placement_array.each do |cell_name|
-      if @cells[cell_name].empty? == false
-        check = false
+
+      @cells.each_key do |cell_name|
+        ship_placement_array.each do |ship_cell|
+          if @cells[cell_name].empty? == false && @cells[cell_name].coordinate == ship_cell
+            check = false
+          end
+        end
       end
-    end
 
     check
   end
@@ -67,7 +70,7 @@ class Board
   def render(view = false)
     @board_render = []
     i = 16
-    @board_render << " 1 2 3 4"
+    @board_render << "  1 2 3 4"
     @board_render << "\nA"
     cells.each do |cell_name, cell|
       i -= 1
@@ -87,6 +90,6 @@ class Board
         @board_render << cell.render(view)
       end
     end
-    p @board_render.join(' ')
+    puts @board_render.join(' ')
   end
 end

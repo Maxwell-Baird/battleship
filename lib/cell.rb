@@ -25,9 +25,6 @@ class Cell
       @ship.hit
     end
     @fired_upon = true
-    if @ship != nil
-      ship.hit
-    end
   end
 
   def empty?
@@ -35,17 +32,17 @@ class Cell
   end
 
   def render(cell_status = nil)
-    if cell_status == true && @ship != nil
-      p "S"
-    elsif fired_upon? == false
-      p "."
-    elsif fired_upon? == true && @cell_empty == true
-      p 'M'
+    if @ship != nil && @ship.sunk? == true
+      "X"
     elsif (fired_upon? == true && @ship != nil && @cell_empty == false &&
       @ship.sunk? == false)
-      p "H"
-    elsif @ship != nil && @ship.sunk? == true
-      p "X"
+      "H"
+    elsif cell_status == true && @ship != nil
+      "S"
+    elsif fired_upon? == true && @cell_empty == true
+      "M"
+    elsif fired_upon? == false
+      "."
     end
   end
 
