@@ -50,8 +50,8 @@ class Game
       end
   end
 
-  def computer_board_setup
-    create_computer_ships
+  def game_setup
+    create_computer_ships_and_both_boards
     place_computer_ships
 
     print "I have laid out my ships on the grid. \nYou now need to lay out your two ships. \nThe Cruiser is three units long and the Submarine is two units long. \n  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \nEnter three squares for the Cruiser (These should be in an horizontal or vertical line and correspond to the grid -- for example, A1, A2, A3): > "
@@ -106,10 +106,6 @@ class Game
   end
 
 #Helper Methods to Set Up Player Cruiser
-
-  def create_player_board
-    player_board = Board.new
-  end
 
   def cruiser_conversion
     initial_cruiser_string = @cruiser_response.join()
@@ -167,8 +163,9 @@ class Game
 
 #Helper Methods to Set Up Computer Ships
 
-  def create_computer_ships
+  def create_computer_ships_and_both_boards
     @computer_board = Board.new
+    @player_board = Board.new
     @computer = Computer.new
     @computer_cruiser = Ship.new('Computer Cruiser', 3)
     @computer_submarine = Ship.new('Computer Submarine', 2)
