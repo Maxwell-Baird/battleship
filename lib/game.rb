@@ -19,7 +19,9 @@ class Game
               :cruiser_validation_value,
               :player_submarine,
               :submarine_validation_array,
-              :submarine_validation_value
+              :submarine_validation_value,
+              :computer_cells,
+              :player_cells
   attr_accessor :player_cruiser_coordinates,
                 :cruiser_response,
                 :cruiser_string,
@@ -102,9 +104,26 @@ class Game
     end
   end
 
+  def create_array_of_player_cells
+    @player_cells = []
+    @player_cells << submarine_array
+    @player_cells << cruiser_array
+  end
+
   def take_turn
+    loop do
     display_boards
-    turn
+    player_take_turn
+      if player_cruiser.health + player_submarine.health == 0
+        print "I won!"
+        break
+      end
+    computer_take_turn
+      if computer_cruiser.health + computer_submarine.health == 0
+        print "You won!"
+        break
+      end
+    end
   end
 
   def display_boards
@@ -114,30 +133,46 @@ class Game
     player_board.render(true)
   end
 
-  def turn
+
+  def player_take_turn
     print "Choose a coordinate to fire on: > "
     player_coordinate_choice = gets.chomp
-    cell1 = Cell.new(player_coordinate_choice)
-    cell2 = Cell.new(computer.shot_at)
-    cell1.fire_upon
-      print "Your shot was a: "
-      if cell1.render == 'M'
-        print "MISS \n"
-      elsif cell1.render == 'H'
-        print "HIT \n"
-      elsif cell1.render == 'X'
-        print "HIT AND SINK!!! \n"
+    require "pry"; binding.pry
+    @computer_cells.each do |cell|
+      if cell == player_coordinate_choice
+        cell.fire_upon
+          if cell.ship.health > 0
+            print "Your shot was a hit!"
+            break
+          elsif cell.ship.health == 0
+            print "Your shot was a hit and sink!"
+            break
+          end
+      else
+        print "Your shot was a miss!"
       end
-    cell2.fire_upon
-    print "The computer's shot was a: "
-    if cell2.render == 'M'
-      print "MISS \n"
-    elsif cell2.render == 'H'
-      print "HIT \n"
-    elsif cell2.render == 'X'
-      print "HIT AND SINK!!! \n"
     end
   end
+
+  def computer_take_turn
+    computer_shot = computer.shot_at
+    @player_cells.each do |cell|
+      if cell == computer_shot
+        cell.fire_upon
+          if cell.ship.health > 0
+            print "My shot was a hit!"
+            break
+          elsif cell.ship.health == 0
+            print "My shot was a hit and sink!"
+            break
+          end
+      else
+        print "My shot was a miss!"
+      end
+    end
+  end
+
+
 #Helper Methods to Set Up Player Cruiser
 
   def cruiser_conversion
@@ -205,8 +240,10 @@ class Game
   end
 
   def place_computer_ships
-    computer.choose_location(@computer_cruiser)
-    computer.choose_location(@computer_submarine)
+    @computer_cells = []
+    cruiser_location = computer.choose_location(@computer_cruiser)
+    submarine_location = computer.choose_location(@computer_submarine)
+    @computer_cells = cruiser_location.concat submarine_location
   end
 
 end
