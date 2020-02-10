@@ -28,7 +28,15 @@ class Board
 
 
   def valid_coordinate?(cell_parameter)
-    @cells.has_key?(cell_parameter)
+    check = false
+    if cell_parameter.length == 2
+      letter_cap = cell_parameter.capitalize
+
+      if @cells.has_key?(letter_cap)
+        check = true
+      end
+    end
+    check
   end
 
   def place(ship_parameter, ship_placement_array)
@@ -40,28 +48,63 @@ class Board
   def valid_placement?(ship_parameter, ship_placement_array)
 
     check = false
+    check_cap = false
     placement_array = ['A1B1C1D1','A2B2C2D2','A3B3C3D3',
     'A4B4C4D4','A1A2A3A4','B1B2B3B4','C1C2C3C4','D1D2D3D4']
 
-    ship_string = ship_placement_array.join
-    placement_array.each do |row|
-      if row.include?(ship_string)
-        check = true
-      end
-    end
-
-    if ship_placement_array.length != ship_parameter.length
-      check = false
-    end
-
-
+    ship_placement_array.each do |part|
       @cells.each_key do |cell_name|
-        ship_placement_array.each do |ship_cell|
-          if @cells[cell_name].empty? == false && @cells[cell_name].coordinate == ship_cell
-            check = false
-          end
+        if @cells[cell_name].coordinate == part.capitalize
+          check_cap = true
         end
       end
+
+    end
+
+    if check_cap == true
+      cap_array = []
+      ship_placement_array.each do |part|
+        cap_array << part.capitalize
+      end
+
+      ship_string = cap_array.join
+      placement_array.each do |row|
+        if row.include?(ship_string)
+          check = true
+        end
+      end
+
+      if cap_array.length != ship_parameter.length
+        check = false
+      end
+        @cells.each_key do |cell_name|
+          cap_array.each do |ship_cell|
+            if @cells[cell_name].empty? == false && @cells[cell_name].coordinate == ship_cell
+              check = false
+            end
+          end
+        end
+    else
+      ship_string = ship_placement_array.join
+      placement_array.each do |row|
+        if row.include?(ship_string)
+          check = true
+        end
+      end
+
+      if ship_placement_array.length != ship_parameter.length
+        check = false
+      end
+
+
+        @cells.each_key do |cell_name|
+          ship_placement_array.each do |ship_cell|
+            if @cells[cell_name].empty? == false && @cells[cell_name].coordinate == ship_cell
+              check = false
+            end
+          end
+        end
+    end
 
     check
   end
@@ -91,5 +134,6 @@ class Board
       end
     end
     puts @board_render.join(' ')
+    @board_render.join(' ')
   end
 end

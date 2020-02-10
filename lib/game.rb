@@ -7,15 +7,6 @@ class Game
 
   def initialize
     @input_welcome = ''
-    @computer = Computer.new
-    @player_board = Board.new
-    @computer_board = Board.new
-    @cruiser = Ship.new('Cruiser', 3)
-    @submarine = Ship.new('Submarine', 2)
-    @c_cruiser = Ship.new('cruiser', 3)
-    @c_submarine = Ship.new('submarine', 2)
-    @player_health = 5
-    @computer_health = 5
   end
 
   def start
@@ -38,8 +29,13 @@ class Game
       puts "Please enter in again either p or q"
       @input_welcome = gets.chomp
     end
-    @player_health = 5
-    @computer_health = 5
+    @computer = Computer.new
+    @player_board = Board.new
+    @computer_board = Board.new
+    @cruiser = Ship.new('Cruiser', 3)
+    @submarine = Ship.new('Submarine', 2)
+    @c_cruiser = Ship.new('cruiser', 3)
+    @c_submarine = Ship.new('submarine', 2)
   end
 
   def setup
@@ -50,23 +46,31 @@ class Game
     puts 'Enter the squares for the Cruiser (3 spaces):'
     input = gets.chomp
     three_array = input.split(' ')
-    while !@player_board.valid_placement?(@cruiser, three_array)
+    check_cru_space = check_space(three_array)
+    check_cru = check_capitalize(check_cru_space)
+    while !@player_board.valid_placement?(@cruiser, check_cru)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
       three_array = input.split(' ')
+      check_cru_space = check_space(three_array)
+      check_cru = check_capitalize(check_cru_space)
     end
-    @player_board.place(@cruiser, three_array)
+    @player_board.place(@cruiser, check_cru)
     @player_board.render(true)
     puts ' '
     puts 'Enter the squares for the Submarine (2 spaces):'
     input = gets.chomp
     two_array = input.split(' ')
-    while !@player_board.valid_placement?(@submarine, two_array)
+    check_sub_space = check_space(two_array)
+    check_sub = check_capitalize(check_sub_space)
+    while !@player_board.valid_placement?(@submarine, check_sub)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
       two_array = input.split(' ')
+      check_sub_space = check_space(two_array)
+      check_sub = check_capitalize(check_sub_space)
     end
-    @player_board.place(@submarine, two_array)
+    @player_board.place(@submarine, check_sub)
     @player_board.render(true)
     puts ' '
 
@@ -95,47 +99,92 @@ class Game
     puts ''
     puts 'Enter the coordinate for your shot:'
     input_coord = gets.chomp
-    while !@player_board.valid_coordinate?(input_coord)
+    input_cap = input_coord.capitalize()
+    while !@computer_board.valid_coordinate?(input_cap)
       puts "Please enter a valid coordinate:"
       input_coord = gets.chomp
+      input_cap = input_coord.capitalize()
     end
-    @computer_board.cells[input_coord].fire_upon
-    player_result = @computer_board.cells[input_coord].render
+    check = @computer_board.cells[input_cap].fired_upon?
+    while check
+      puts "You already fired at this place, Please type in a different location:"
+      input_coord = gets.chomp
+      input_cap = input_coord.capitalize()
+      while !@computer_board.valid_coordinate?(input_cap)
+        puts "Please enter a valid coordinate:"
+        input_coord = gets.chomp
+        input_cap = input_coord.capitalize()
+      end
+      check = @computer_board.cells[input_cap].fired_upon?
+    end
+    input_cap = input_coord.capitalize()
+    @computer_board.cells[input_cap].fire_upon
+    player_result = @computer_board.cells[input_cap].render
     computer_coord = @computer.shot_at
     @player_board.cells[computer_coord].fire_upon
     computer_result = @player_board.cells[computer_coord].render
+    puts ''
     if player_result == 'M'
-      puts "Your shot on #{input_coord} was a miss"
+      puts "Your shot on #{input_cap} was a miss"
     elsif player_result == 'H'
-      puts "Your shot on #{input_coord} was a hit"
-      @computer_health -= 1
+      puts "Your shot on #{input_cap} was a hit"
+
     elsif player_result == 'X'
-      puts "Your shot on #{input_coord} sunk a ship"
-      @computer_health -= 1
+      puts "Your shot on #{input_cap} sunk a ship"
     end
 
     if computer_result == 'M'
       puts "My shot on #{computer_coord} was a miss"
     elsif computer_result == 'H'
       puts "My shot on #{computer_coord} was a hit"
-      @player_health -= 1
     elsif computer_result == 'X'
       puts "My shot on #{computer_coord} sunk a ship"
-      @player_health -= 1
     end
     puts ' '
   end
 
   def win_status
     check = false
-    if @player_health == 0
+    if @cruiser.health == 0 && @submarine.health == 0
       puts 'I have WON!!!!!'
       check = true
-    elsif @computer_health == 0
+    elsif @c_cruiser.health == 0 && @c_submarine.health == 0
       puts 'You have WON!!!!'
       check = true
     end
     check
+  end
+
+  def check_capitalize(input_array)
+    output = []
+    check_cap = false
+    input_array.each do |part|
+      @player_board.cells.each_key do |cell_name|
+        if @player_board.cells[cell_name].coordinate == part.capitalize
+          check_cap = true
+        end
+      end
+    end
+    if check_cap == true
+      output = []
+      input_array.each do |part|
+        output << part.capitalize
+      end
+    else
+      output = input_array
+    end
+    output
+  end
+
+  def check_space(input_array)
+    output = []
+    test = input_array.join('')
+    if test.include?(',')
+      output = test.split(',')
+    else
+      output = input_array
+    end
+    output
   end
 
 end
