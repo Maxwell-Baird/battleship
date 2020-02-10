@@ -14,8 +14,6 @@ class Game
     @submarine = Ship.new('Submarine', 2)
     @c_cruiser = Ship.new('cruiser', 3)
     @c_submarine = Ship.new('submarine', 2)
-    @player_health = 5
-    @computer_health = 5
   end
 
   def start
@@ -45,8 +43,6 @@ class Game
     @submarine = Ship.new('Submarine', 2)
     @c_cruiser = Ship.new('cruiser', 3)
     @c_submarine = Ship.new('submarine', 2)
-    @player_health = 5
-    @computer_health = 5
   end
 
   def setup
@@ -74,7 +70,6 @@ class Game
     two_array = input.split(' ')
     check_sub_space = check_space(two_array)
     check_sub = check_capitalize(check_sub_space)
-
     while !@player_board.valid_placement?(@submarine, check_sub)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
@@ -129,8 +124,6 @@ class Game
       end
       check = @computer_board.cells[input_cap].fired_upon?
     end
-
-
     input_cap = input_coord.capitalize()
     @computer_board.cells[input_cap].fire_upon
     player_result = @computer_board.cells[input_cap].render
@@ -198,7 +191,6 @@ class Game
     else
       output = input_array
     end
-
     output
   end
 
