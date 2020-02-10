@@ -38,13 +38,6 @@ class Game
       puts "Please enter in again either p or q"
       @input_welcome = gets.chomp
     end
-    #@computer = Computer.new
-    #@player_board = Board.new
-    #@computer_board = Board.new
-    #@cruiser = Ship.new('Cruiser', 3)
-    #@submarine = Ship.new('Submarine', 2)
-    #@c_cruiser = Ship.new('cruiser', 3)
-    #@c_submarine = Ship.new('submarine', 2)
     @player_health = 5
     @computer_health = 5
   end
