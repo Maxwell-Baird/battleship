@@ -134,5 +134,6 @@ class Board
       end
     end
     puts @board_render.join(' ')
+    @board_render.join(' ')
   end
 end
