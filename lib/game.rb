@@ -180,15 +180,11 @@ class Game
 
   def check_space(input_array)
     output = []
-    check_space = false
     test = input_array.join('')
-    if test.include?(' ')
-      output = input_array
-    else
-      check_space = true
-    end
-    if check_space == true
+    if test.include?(',')
       output = test.split(',')
+    else
+      output = input_array
     end
 
     output
