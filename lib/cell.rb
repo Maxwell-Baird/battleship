@@ -21,12 +21,12 @@ class Cell
   end
 
   def fire_upon
-    if @ship != nil
-      @ship.hit
+    if fired_upon? == false
+      if @ship != nil
+        @ship.hit
+      end
+      @fired_upon = true
     end
-    @fired_upon = true
-#    if @ship != nil
-#      ship.hit
   end
 
   def empty?

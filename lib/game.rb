@@ -127,30 +127,27 @@ class Game
       puts "Your shot on #{input_cap} was a miss"
     elsif player_result == 'H'
       puts "Your shot on #{input_cap} was a hit"
-      @computer_health -= 1
+
     elsif player_result == 'X'
       puts "Your shot on #{input_cap} sunk a ship"
-      @computer_health -= 1
     end
 
     if computer_result == 'M'
       puts "My shot on #{computer_coord} was a miss"
     elsif computer_result == 'H'
       puts "My shot on #{computer_coord} was a hit"
-      @player_health -= 1
     elsif computer_result == 'X'
       puts "My shot on #{computer_coord} sunk a ship"
-      @player_health -= 1
     end
     puts ' '
   end
 
   def win_status
     check = false
-    if @player_health == 0
+    if @cruiser.health == 0 && @submarine.health == 0
       puts 'I have WON!!!!!'
       check = true
-    elsif @computer_health == 0
+    elsif @c_cruiser.health == 0 && @c_submarine.health == 0
       puts 'You have WON!!!!'
       check = true
     end
