@@ -1,19 +1,21 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require './lib/ship'
+require './lib/cell'
+require './lib/board'
 require './lib/game'
 
 class GameTest < Minitest::Test
-  def setup
-    game = Game.new
-  end
 
-  def test_new_game_exists
+  def test_game_exist
+    game = Game.new
     assert_instance_of Game, game
   end
 
-  def should_new_game_start
-
-
-
-
+  def test_game_win_status
+    game = Game.new
+    assert_equal false, game.win_status
+    game.player_health = 0
+    assert_equal true, test_game_win_status
+  end
 end
