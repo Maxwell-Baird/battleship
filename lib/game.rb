@@ -137,6 +137,7 @@ class Game
     computer_coord = @computer.shot_at
     @player_board.cells[computer_coord].fire_upon
     computer_result = @player_board.cells[computer_coord].render
+    puts ''
     if player_result == 'M'
       puts "Your shot on #{input_cap} was a miss"
     elsif player_result == 'H'
