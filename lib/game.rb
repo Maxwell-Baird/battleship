@@ -113,10 +113,26 @@ class Game
     puts ''
     puts 'Enter the coordinate for your shot:'
     input_coord = gets.chomp
-    while !@player_board.valid_coordinate?(input_coord)
+    input_cap = input_coord.capitalize()
+    while !@computer_board.valid_coordinate?(input_cap)
       puts "Please enter a valid coordinate:"
       input_coord = gets.chomp
+      input_cap = input_coord.capitalize()
     end
+    check = @computer_board.cells[input_cap].fired_upon?
+    while check
+      puts "You already fired at this place, Please type in a different location:"
+      input_coord = gets.chomp
+      input_cap = input_coord.capitalize()
+      while !@computer_board.valid_coordinate?(input_cap)
+        puts "Please enter a valid coordinate:"
+        input_coord = gets.chomp
+        input_cap = input_coord.capitalize()
+      end
+      check = @computer_board.cells[input_cap].fired_upon?
+    end
+
+
     input_cap = input_coord.capitalize()
     @computer_board.cells[input_cap].fire_upon
     player_result = @computer_board.cells[input_cap].render
