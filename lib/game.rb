@@ -48,8 +48,7 @@ class Game
     puts 'Enter the squares for the Cruiser (3 spaces):'
     input = gets.chomp
     three_array = input.split(' ')
-    check_cru_space = check_space(three_array)
-    check_cru = check_capitalize(check_cru_space)
+    stardardize_input(three_array)
     while !@player_board.valid_placement?(@cruiser, check_cru)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
@@ -179,6 +178,7 @@ class Game
   end
 
   def check_space(input_array)
+
     output = []
     test = input_array.join('')
     if test.include?(',')
@@ -188,5 +188,12 @@ class Game
     end
     output
   end
+
+  def standardize_input(input_array)
+    check_cru_space = check_space(input_array)
+    check_cru = check_capitalize(check_cru_space)
+
+  end
+
 
 end
