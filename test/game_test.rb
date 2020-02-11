@@ -4,6 +4,7 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/game'
+require 'mocha/minitest'
 
 class GameTest < Minitest::Test
 
@@ -32,6 +33,7 @@ class GameTest < Minitest::Test
   end
 
   def test_stardardize_input
+    skip
     game = Game.new
     array1 = ['a1','b1','c1']
     array2 = ['A1','B1','C1']
@@ -42,6 +44,11 @@ class GameTest < Minitest::Test
     assert_equal ['A1','B1','C1'], game.standardize_input(array2)
     assert_equal ['A1','A2','A3'], game.standardize_input(array3)
     assert_equal ['A1','B1','C1'], game.standardize_input(array4)
+  end
+
+  def test_received_cruiser_player_input
+    game = Game.new
+    assert_instance_of Array, game.cruiser_player_input
   end
 
 end
