@@ -48,30 +48,27 @@ class Game
     puts 'Enter the squares for the Cruiser (3 spaces):'
     input = gets.chomp
     three_array = input.split(' ')
-    stardardize_input(three_array)
-    while !@player_board.valid_placement?(@cruiser, check_cru)
+    standardized_cruiser = standardize_input(three_array)
+    while !@player_board.valid_placement?(@cruiser, standardized_cruiser)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
       three_array = input.split(' ')
-      check_cru_space = check_space(three_array)
-      check_cru = check_capitalize(check_cru_space)
+      standardized_cruiser = standardize_input(three_array)
     end
-    @player_board.place(@cruiser, check_cru)
+    @player_board.place(@cruiser, standardized_cruiser)
     @player_board.render(true)
     puts ' '
     puts 'Enter the squares for the Submarine (2 spaces):'
     input = gets.chomp
     two_array = input.split(' ')
-    check_sub_space = check_space(two_array)
-    check_sub = check_capitalize(check_sub_space)
-    while !@player_board.valid_placement?(@submarine, check_sub)
+    standardized_sub = standardize_input(two_array)
+    while !@player_board.valid_placement?(@submarine, standardized_sub)
       puts 'Those are invalid coordinates. Please try again:'
       input = gets.chomp
       two_array = input.split(' ')
-      check_sub_space = check_space(two_array)
-      check_sub = check_capitalize(check_sub_space)
+      standardized_sub = standardize_input(two_array)
     end
-    @player_board.place(@submarine, check_sub)
+    @player_board.place(@submarine, standardized_sub)
     @player_board.render(true)
     puts ' '
 
