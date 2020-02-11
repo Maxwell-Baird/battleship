@@ -101,6 +101,21 @@ class Game
     puts ''
     puts 'Enter the coordinate for your shot:'
     input_coord = gets.chomp
+    input_coord = turn_check(input_coord)
+    input_cap = input_coord.capitalize()
+    render(input_cap)
+    results(input_cap,computer_coord)
+  end
+
+  def render(input_cap)
+    @computer_board.cells[input_cap].fire_upon
+    player_result = @computer_board.cells[input_cap].render
+    computer_coord = @computer.shot_at
+    @player_board.cells[computer_coord].fire_upon
+    computer_result = @player_board.cells[computer_coord].render
+  end
+
+  def turn_check(input_coord)
     input_cap = input_coord.capitalize()
     while !@computer_board.valid_coordinate?(input_cap)
       puts "Please enter a valid coordinate:"
@@ -119,22 +134,18 @@ class Game
       end
       check = @computer_board.cells[input_cap].fired_upon?
     end
-    input_cap = input_coord.capitalize()
-    @computer_board.cells[input_cap].fire_upon
-    player_result = @computer_board.cells[input_cap].render
-    computer_coord = @computer.shot_at
-    @player_board.cells[computer_coord].fire_upon
-    computer_result = @player_board.cells[computer_coord].render
+    input_cap
+  end
+
+  def results(input_cap, computer_coord)
     puts ''
     if player_result == 'M'
       puts "Your shot on #{input_cap} was a miss"
     elsif player_result == 'H'
       puts "Your shot on #{input_cap} was a hit"
-
     elsif player_result == 'X'
       puts "Your shot on #{input_cap} sunk a ship"
     end
-
     if computer_result == 'M'
       puts "My shot on #{computer_coord} was a miss"
     elsif computer_result == 'H'
