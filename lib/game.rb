@@ -7,6 +7,8 @@ class Game
 
   def initialize
     @input_welcome = ''
+    @player_board = Board.new
+    @computer_board = Board.new
   end
 
   def start
