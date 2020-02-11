@@ -103,16 +103,20 @@ class Game
     input_coord = gets.chomp
     input_coord = turn_check(input_coord)
     input_cap = input_coord.capitalize()
-    render(input_cap)
-    results(input_cap,computer_coord)
+    computer_coord = @computer.shot_at
+    results(input_cap, computer_coord, render_computer(computer_coord), render_player(input_cap))
   end
 
-  def render(input_cap)
+  def render_player(input_cap)
     @computer_board.cells[input_cap].fire_upon
     player_result = @computer_board.cells[input_cap].render
-    computer_coord = @computer.shot_at
+    player_result
+  end
+
+  def render_computer(computer_coord)
     @player_board.cells[computer_coord].fire_upon
     computer_result = @player_board.cells[computer_coord].render
+    computer_result
   end
 
   def turn_check(input_coord)
@@ -137,20 +141,20 @@ class Game
     input_cap
   end
 
-  def results(input_cap, computer_coord)
+  def results(input_cap, computer_coord, player_result, computer_result)
     puts ''
-    if player_result == 'M'
+    if computer_result == 'M'
       puts "Your shot on #{input_cap} was a miss"
-    elsif player_result == 'H'
+    elsif computer_result == 'H'
       puts "Your shot on #{input_cap} was a hit"
-    elsif player_result == 'X'
+    elsif computer_result == 'X'
       puts "Your shot on #{input_cap} sunk a ship"
     end
-    if computer_result == 'M'
+    if player_result == 'M'
       puts "My shot on #{computer_coord} was a miss"
-    elsif computer_result == 'H'
+    elsif player_result == 'H'
       puts "My shot on #{computer_coord} was a hit"
-    elsif computer_result == 'X'
+    elsif player_result == 'X'
       puts "My shot on #{computer_coord} sunk a ship"
     end
     puts ' '
