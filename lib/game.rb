@@ -2,8 +2,11 @@ require './lib/computer'
 require './lib/board'
 require './lib/ship'
 require './lib/cell'
+require 'pry'
 
 class Game
+
+  attr_reader :input_welcome, :player_board, :computer_board
 
   def initialize
     @input_welcome = ''
@@ -41,6 +44,7 @@ class Game
   end
 
   def setup
+
     puts 'I have laid out my ships on the grid.'
     puts 'You now need to lay out your two ships'
     puts 'The Cruiser is three units long and the Submarine is two units long.'
@@ -79,8 +83,10 @@ class Game
   end
 
   def computer_setup
+
     cruiser_array = @computer.choose_location(@c_cruiser)
     while !(@computer_board.valid_placement?(@c_cruiser, cruiser_array))
+      binding.pry
       cruiser_array = @computer.choose_location(@c_cruiser)
     end
     @computer_board.place(@c_cruiser, cruiser_array)
@@ -101,6 +107,25 @@ class Game
     puts ''
     puts 'Enter the coordinate for your shot:'
     input_coord = gets.chomp
+    input_coord = turn_check(input_coord)
+    input_cap = input_coord.capitalize()
+    computer_coord = @computer.shot_at
+    results(input_cap, computer_coord, render_computer(computer_coord), render_player(input_cap))
+  end
+
+  def render_player(input_cap)
+    @computer_board.cells[input_cap].fire_upon
+    player_result = @computer_board.cells[input_cap].render
+    player_result
+  end
+
+  def render_computer(computer_coord)
+    @player_board.cells[computer_coord].fire_upon
+    computer_result = @player_board.cells[computer_coord].render
+    computer_result
+  end
+
+  def turn_check(input_coord)
     input_cap = input_coord.capitalize()
     while !@computer_board.valid_coordinate?(input_cap)
       puts "Please enter a valid coordinate:"
@@ -119,27 +144,24 @@ class Game
       end
       check = @computer_board.cells[input_cap].fired_upon?
     end
-    input_cap = input_coord.capitalize()
-    @computer_board.cells[input_cap].fire_upon
-    player_result = @computer_board.cells[input_cap].render
-    computer_coord = @computer.shot_at
-    @player_board.cells[computer_coord].fire_upon
-    computer_result = @player_board.cells[computer_coord].render
-    puts ''
-    if player_result == 'M'
-      puts "Your shot on #{input_cap} was a miss"
-    elsif player_result == 'H'
-      puts "Your shot on #{input_cap} was a hit"
+    input_cap
+  end
 
-    elsif player_result == 'X'
+
+  def results(input_cap, computer_coord, player_result, computer_result)
+    puts ''
+    if computer_result == 'M'
+      puts "Your shot on #{input_cap} was a miss"
+    elsif computer_result == 'H'
+      puts "Your shot on #{input_cap} was a hit"
+    elsif computer_result == 'X'
       puts "Your shot on #{input_cap} sunk a ship"
     end
-
-    if computer_result == 'M'
+    if player_result == 'M'
       puts "My shot on #{computer_coord} was a miss"
-    elsif computer_result == 'H'
+    elsif player_result == 'H'
       puts "My shot on #{computer_coord} was a hit"
-    elsif computer_result == 'X'
+    elsif player_result == 'X'
       puts "My shot on #{computer_coord} sunk a ship"
     end
     puts ' '
