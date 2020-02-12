@@ -221,7 +221,7 @@ class Game
     while !@player_board.valid_placement?(@submarine, @standardized_sub)
       puts 'Those are invalid coordinates. Please try again:'
       submarine_player_input
-      standardized_sub = standardize_input(@two_array)
+      @standardized_sub = standardize_input(@two_array)
     end
   end
 end
