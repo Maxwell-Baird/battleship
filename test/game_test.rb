@@ -46,9 +46,16 @@ class GameTest < Minitest::Test
     assert_equal ['A1','B1','C1'], game.standardize_input(array4)
   end
 
-  def test_received_cruiser_player_input
+  def test_cruiser_player_input
     game = Game.new
     assert_instance_of Array, game.cruiser_player_input
   end
+
+  def test_submarine_player_input
+    game = Game.new
+    assert_instance_of Array, game.submarine_player_input
+  end
+
+  def test_invalid_coordinates_loop
 
 end

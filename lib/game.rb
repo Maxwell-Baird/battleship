@@ -46,33 +46,26 @@ class Game
     puts 'The Cruiser is three units long and the Submarine is two units long.'
     @player_board.render
     puts 'Enter the squares for the Cruiser (3 spaces):'
-    input = gets.chomp
-    three_array = input.split(' ')
-
-    standardized_cruiser = standardize_input(three_array)
+    cruiser_player_input
+    standardized_cruiser = standardize_input(@three_array)
 
     while !@player_board.valid_placement?(@cruiser, standardized_cruiser)
       puts 'Those are invalid coordinates. Please try again:'
-      input = gets.chomp
-      three_array = input.split(' ')
-      standardized_cruiser = standardize_input(three_array)
+      cruiser_player_input
+      standardized_cruiser = standardize_input(@three_array)
     end
 
     @player_board.place(@cruiser, standardized_cruiser)
     @player_board.render(true)
     puts ' '
     puts 'Enter the squares for the Submarine (2 spaces):'
-
-    input = gets.chomp
-    two_array = input.split(' ')
-
-    standardized_sub = standardize_input(two_array)
+    submarine_player_input
+    standardized_sub = standardize_input(@two_array)
 
     while !@player_board.valid_placement?(@submarine, standardized_sub)
       puts 'Those are invalid coordinates. Please try again:'
-      input = gets.chomp
-      two_array = input.split(' ')
-      standardized_sub = standardize_input(two_array)
+      submarine_player_input
+      standardized_sub = standardize_input(@two_array)
     end
 
     @player_board.place(@submarine, standardized_sub)
@@ -195,7 +188,12 @@ class Game
 
   def cruiser_player_input
     input = gets.chomp
-    three_array = input.split(' ')
+    @three_array = input.split(' ')
+  end
+
+  def submarine_player_input
+    input = gets.chomp
+    @two_array = input.split(' ')
   end
 
   def standardize_input(input_array)
