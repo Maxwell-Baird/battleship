@@ -2,7 +2,6 @@ require './lib/computer'
 require './lib/board'
 require './lib/ship'
 require './lib/cell'
-require 'pry'
 
 class Game
 
@@ -67,7 +66,6 @@ class Game
 
     cruiser_array = @computer.choose_location(@c_cruiser)
     while !(@computer_board.valid_placement?(@c_cruiser, cruiser_array))
-      binding.pry
       cruiser_array = @computer.choose_location(@c_cruiser)
     end
     @computer_board.place(@c_cruiser, cruiser_array)
@@ -221,7 +219,7 @@ class Game
     while !@player_board.valid_placement?(@submarine, @standardized_sub)
       puts 'Those are invalid coordinates. Please try again:'
       submarine_player_input
-      standardized_sub = standardize_input(@two_array)
+      @standardized_sub = standardize_input(@two_array)
     end
   end
 end
