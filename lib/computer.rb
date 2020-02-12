@@ -16,7 +16,6 @@ class Computer
     vert_or_horz = vert_or_horz_choice.sample
     location = ''
     cells_location = []
-
     if vert_or_horz == 'h' && ship_parameter.length == 3
       possible_locations_h_3 = ['A1','A2','B1','B2','C1','C2','D1','D2']
       location = possible_locations_h_3.sample
@@ -63,7 +62,6 @@ class Computer
         builder_letter = letter
       end
     end
-
     cells_location
   end
 

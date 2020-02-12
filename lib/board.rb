@@ -45,34 +45,43 @@ class Board
   end
 
   def valid_placement?(ship_parameter, ship_placement_array)
+    check_r = placement_in_a_row?(ship_parameter, ship_placement_array)
+    check_l = placement_equal_to_length?(ship_placement_array, ship_parameter)
+    check_e = placement_not_empty?(ship_placement_array)
+    check_r && check_e && check_l
+  end
+
+  def placement_in_a_row?(ship_parameter, ship_placement_array)
     check = false
     placement_array = ['A1B1C1D1','A2B2C2D2','A3B3C3D3',
     'A4B4C4D4','A1A2A3A4','B1B2B3B4','C1C2C3C4','D1D2D3D4']
-      ship_string = ship_placement_array.join
-      placement_array.each do |row|
-        if row.include?(ship_string)
-          check = true
-        end
+    ship_string = ship_placement_array.join
+    placement_array.each do |row|
+      if row.include?(ship_string)
+        check = true
       end
-      check = placement_equal_to_length(ship_placement_array, ship_parameter)
-      check = placement_not_empty(ship_placement_array)
+    end
     check
   end
 
-  def placement_equal_to_length(ship_placement_array, ship_parameter)
+  def placement_equal_to_length?(ship_placement_array, ship_parameter)
     if ship_placement_array.length != ship_parameter.length
       false
+    else
+      true
     end
   end
 
-  def placement_not_empty(ship_placement_array)
+  def placement_not_empty?(ship_placement_array)
+    check = true
     @cells.each_key do |cell_name|
       ship_placement_array.each do |ship_cell|
-        if @cells[cell_name].empty? == false && @cells[cell_name].coordinate == ship_cell
+        if @cells[cell_name].empty?  == false && @cells[cell_name].coordinate == ship_cell
           check = false
         end
       end
     end
+    check
   end
 
   def render(view = false)

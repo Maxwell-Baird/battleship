@@ -2,8 +2,11 @@ require './lib/computer'
 require './lib/board'
 require './lib/ship'
 require './lib/cell'
+require 'pry'
 
 class Game
+
+  attr_reader :input_welcome, :player_board, :computer_board
 
   def initialize
     @input_welcome = ''
@@ -41,6 +44,7 @@ class Game
   end
 
   def setup
+
     puts 'I have laid out my ships on the grid.'
     puts 'You now need to lay out your two ships'
     puts 'The Cruiser is three units long and the Submarine is two units long.'
@@ -79,8 +83,10 @@ class Game
   end
 
   def computer_setup
+
     cruiser_array = @computer.choose_location(@c_cruiser)
     while !(@computer_board.valid_placement?(@c_cruiser, cruiser_array))
+      binding.pry
       cruiser_array = @computer.choose_location(@c_cruiser)
     end
     @computer_board.place(@c_cruiser, cruiser_array)
@@ -140,6 +146,7 @@ class Game
     end
     input_cap
   end
+
 
   def results(input_cap, computer_coord, player_result, computer_result)
     puts ''
