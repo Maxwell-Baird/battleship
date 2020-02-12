@@ -8,14 +8,11 @@ require './lib/game'
 class GameTest < Minitest::Test
 
   def test_game_exist
-    skip
     game = Game.new
-
     assert_instance_of Game, game
   end
 
   def test_game_can_read_commas
-    skip
     game = Game.new
     array1 = ['A1,A2,A3']
     array2 = ['A1','b1','c1']
@@ -25,7 +22,6 @@ class GameTest < Minitest::Test
   end
 
   def test_game_checks_cap
-    skip
     game = Game.new
     array1 = ['a1','b1','c1']
     array2 = ['A1','B1','C1']
@@ -36,7 +32,6 @@ class GameTest < Minitest::Test
 
 
   def test_stardardize_input
-    skip
     game = Game.new
     array1 = ['a1','b1','c1']
     array2 = ['A1','B1','C1']
@@ -60,7 +55,7 @@ class GameTest < Minitest::Test
 
     assert_instance_of Array, game.submarine_player_input
   end
-  
+
   def test_game_render_computer
     game = Game.new
     assert_equal 'M',game.render_computer('A1')
