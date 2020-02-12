@@ -34,6 +34,7 @@ class GameTest < Minitest::Test
     assert_equal ['A1','B1','C1'], game.check_capitalize(array2)
   end
 
+
   def test_stardardize_input
     skip
     game = Game.new
@@ -58,6 +59,24 @@ class GameTest < Minitest::Test
     game = Game.new
 
     assert_instance_of Array, game.submarine_player_input
+  end
+  
+  def test_game_render_computer
+    game = Game.new
+    assert_equal 'M',game.render_computer('A1')
+    ship = Ship.new('Sub', 2)
+    game.player_board.place(ship, ['A2','A3'])
+    assert_equal 'H',game.render_computer('A2')
+    assert_equal 'X', game.render_computer('A3')
+  end
+
+  def test_game_render_player
+    game = Game.new
+    ship = Ship.new('Sub', 2)
+    game.computer_board.place(ship, ['A2','A3'])
+    assert_equal 'M',game.render_player('A1')
+    assert_equal 'H',game.render_player('A2')
+    assert_equal 'X', game.render_player('A3')
   end
 
 end

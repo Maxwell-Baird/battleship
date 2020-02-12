@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require './lib/ship'
 require './lib/cell'
 require './lib/computer'
@@ -16,9 +17,9 @@ class ComputerTest < Minitest::Test
     submarine = Ship.new('Submarine', 2)
     computer = Computer.new
     assert_equal 3, computer.choose_location(cruiser).length
+    assert_equal Array, computer.choose_location(cruiser).class
     assert_equal 2, computer.choose_location(submarine).length
-    assert_equal 3, computer.choose_location(cruiser).length
-    assert_equal 2, computer.choose_location(submarine).length
+    assert_equal Array, computer.choose_location(submarine).class
   end
 
   def test_computer_shot
